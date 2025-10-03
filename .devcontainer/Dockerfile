@@ -26,7 +26,7 @@ RUN echo 'export TERM=xterm-256color' >> ~/.bashrc && \
     echo 'alias la="ls -A"' >> ~/.bashrc && \
     echo 'alias l="ls -CF"' >> ~/.bashrc && \
     echo 'export PS1="\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[0m\]\$ "' >> ~/.bashrc && \
-    echo 'if [ -f ~/.bash_completion ]; then . etc/bash_completion; fi' >> ~/.bashrc
+    echo 'if [ -f ~/.bash_completion ]; then . /etc/bash_completion; fi' >> ~/.bashrc
 
 # add git completion support
 RUN curl -o ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash && \
