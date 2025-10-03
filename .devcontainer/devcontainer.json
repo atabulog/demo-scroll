@@ -22,5 +22,7 @@
     "forwardPorts": [
         3000,
         8080
-    ] // Example ports to forward
+    ], // Example ports to forward
+    //run an npm install to get a live server
+    "postCreateCommand": "npm install -g live-server"
 }
