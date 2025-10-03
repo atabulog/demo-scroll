@@ -2,6 +2,8 @@
 {
     "name": "scroll-dev",
     "runArgs": [
+        "--name",
+        "scroll-dev",
         "--hostname",
         "dev"
     ],
