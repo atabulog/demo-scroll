@@ -29,17 +29,13 @@ RUN echo 'export TERM=xterm-256color' >> ~/.bashrc && \
     echo 'if [ -f ~/.bash_completion ]; then . /etc/bash_completion; fi' >> ~/.bashrc
 
 # add git completion support
-RUN curl -o ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash && \
-    echo "source ~/.git-completion.bash" >> /root/.bashrc
+RUN curl -o /root/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash && \
+    echo "source /root/.git-completion.bash" >> /root/.bashrc
 
 #add cli formatting for git
-RUN curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh && \
-    echo "source ~/.git-prompt.sh" >> /root/.bashrc && \
-    echo 'if [ -f ~/.git-prompt.sh ]; then' >> /root/.bashrc && \
-    echo '  source ~/.git-prompt.sh' >> /root/.bashrc && \
-    echo '  export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 \" (%s)\")\[\033[00m\]\$ "' >> /root/.bashrc && \
-    echo 'fi' >> /root/.bashrc
-
+RUN curl -o /root/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh && \
+    echo "source /root/.git-prompt.sh" >> /root/.bashrc && \
+    echo 'export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 \" (%s)\")\[\033[00m\]\$ "' >> /root/.bashrc
 # Set work directory
 WORKDIR /workspace
 
