@@ -18,16 +18,27 @@ RUN npm install -g esbuild serve
 # Enable Git coloring globally
 RUN git config --global color.ui auto
 
-# Add bash completion + git prompt support
-RUN echo "if [ -f /etc/bash_completion ]; then . /etc/bash_completion; fi" >> /etc/bash.bashrc \
-    && echo "source /usr/share/bash-completion/completions/git" >> /etc/bash.bashrc \
-    && echo "parse_git_branch() { git branch 2>/dev/null | grep '^*' | colrm 1 2; }" >> /etc/bash.bashrc \
-    && echo "PS1='\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\[\\033[01;33m\\]\$(parse_git_branch)\\[\\033[00m\\]$ '" >> /etc/bash.bashrc
-
+# Set terminal environment variables
 ENV TERM=xterm-256color
+SHELL ["/bin/bash", "-c"]
+RUN echo 'export TERM=xterm-256color' >> ~/.bashrc && \
+    echo 'alias ll="ls -alF"' >> ~/.bashrc && \
+    echo 'alias la="ls -A"' >> ~/.bashrc && \
+    echo 'alias l="ls -CF"' >> ~/.bashrc && \
+    echo 'export PS1="\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[0m\]\$ "' >> ~/.bashrc && \
+    echo 'if [ -f ~/.bash_completion ]; then . etc/bash_completion; fi' >> ~/.bashrc
+
+# add git completion support
+RUN curl -o ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash && \
+    echo "source ~/.git-completion.bash" >> /root/.bashrc
+
+#add cli formatting for git
+RUN curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh && \
+    echo "source ~/.git-prompt.sh" >> /root/.bashrc && \
+    echo "export PS1'\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]'\\'$(__git_ps1 " (%s)")'\\'$ '" >> /root/.bashrc
 
 # Set work directory
 WORKDIR /workspace
 
 # Default command: start a shell
-CMD [ "bash" ]
+CMD [ "/bin/bash" ]
