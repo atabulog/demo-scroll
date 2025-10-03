@@ -35,7 +35,10 @@ RUN curl -o ~/.git-completion.bash https://raw.githubusercontent.com/git/git/mas
 #add cli formatting for git
 RUN curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh && \
     echo "source ~/.git-prompt.sh" >> /root/.bashrc && \
-    echo "export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 " (%s)")\[\033[00m\]\$ '" >> /root/.bashrc
+    echo 'if [ -f ~/.git-prompt.sh ]; then' >> /root/.bashrc && \
+    echo '  source ~/.git-prompt.sh' >> /root/.bashrc && \
+    echo '  export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 \" (%s)\")\[\033[00m\]\$ "' >> /root/.bashrc && \
+    echo 'fi' >> /root/.bashrc
 
 # Set work directory
 WORKDIR /workspace
