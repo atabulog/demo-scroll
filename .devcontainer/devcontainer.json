@@ -10,7 +10,11 @@
     },
     "customizations": {
         "vscode": {
-            "extensions": []
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "gruntfugly.todo-tree",
+                "streetsidesoftware.code-spell-checker"
+            ]
         }
     },
     "forwardPorts": [
