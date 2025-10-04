@@ -21,6 +21,7 @@
     },
     "forwardPorts": [
         3000,
+        5173,
         8080
     ], // Example ports to forward
     //run npm install on startup
