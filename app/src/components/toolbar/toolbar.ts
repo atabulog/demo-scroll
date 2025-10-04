@@ -1,15 +1,13 @@
-export function Toolbar(): HTMLElement {
-    // Load the HTML template
-    const template = document.createElement("div");
-    template.innerHTML = require("./Toolbar.html?raw"); // vite supports ?raw imports
-    const element = template.firstElementChild as HTMLElement;
+//import template and style
+import toolbarHtml from "./toolbar.html?raw";
+import "./toolbar.css";
 
-    // Example behavior: log when icon is clicked
-    element.querySelectorAll(".icon").forEach((icon) => {
-        icon.addEventListener("click", () => {
-            console.log("Icon clicked:", (icon as HTMLImageElement).alt);
-        });
-    });
+//create toolbar element
+export function Toolbar(): HTMLElement {
+    const template = document.createElement("div");
+    template.innerHTML = toolbarHtml;
+
+    const element = template.firstElementChild as HTMLElement;
 
     return element;
 }
