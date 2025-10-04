@@ -11,3 +11,17 @@ export function Toolbar(): HTMLElement {
 
     return element;
 }
+
+/*
+TODO: I want to make the project name editable, but this is going to require
+standing up a development level backend server to handle the requests. I'm leaning
+towards using python and fastapi for the demo backend for testing.
+
+once the embedded backend is stood up from a hardware perspective,  this fast api
+implementation can be used to standup the server and maintain the same behavior as before.
+
+export function editToolbarProjectName(newTitle: string) {
+    const name_element = document.getElementById("project-name");
+
+}
+*/
