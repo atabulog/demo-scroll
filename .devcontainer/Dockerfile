@@ -16,6 +16,15 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g npm@latest
 
+#install python3 and pip
+RUN apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv
+
+#add symlink for python
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
 # Verify versions
 RUN node -v && npm -v
 

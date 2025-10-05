@@ -25,5 +25,5 @@
         8080
     ], // Example ports to forward
     //run npm install on startup
-    "postCreateCommand": "npm install"
+    "postCreateCommand": "cd ./app && npm install"
 }
