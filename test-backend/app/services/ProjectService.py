@@ -1,6 +1,6 @@
 from pathlib import Path
 from threading import Lock
-from schemas.Project import Project
+from app.schemas.Project import Project
 import json
 
 class ProjectService:
@@ -29,7 +29,7 @@ class ProjectService:
         """
         # guard against bad data file
         if not self._file_path.exists():
-            return Project(project_title="Default project")
+            return Project(title="Default project")
         
         # open stored data and read file
         with self._file_path.open("r") as file:

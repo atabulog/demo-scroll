@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
-from services.ProjectService import ProjectService, get_project_service
+from app.services.ProjectService import ProjectService, get_project_service
 
 router: APIRouter = APIRouter()
 
-@router.get("/api/project/{key}")
+@router.get("/{key}")
 async def get_data(key: str, project_service: ProjectService = Depends(get_project_service))->JSONResponse:
     """Generic get controller to get any specific field directly out of the project file
 
@@ -20,7 +20,7 @@ async def get_data(key: str, project_service: ProjectService = Depends(get_proje
         return JSONResponse({"error": "Key not found"}, status_code=404)
     return JSONResponse({key: value})
 
-@router.post("/api/project/{key}")
+@router.post("/{key}")
 async def set_data(key: str, payload: dict, project_service: ProjectService = Depends(get_project_service)):
     value = payload.get("value")
     if value is None:
