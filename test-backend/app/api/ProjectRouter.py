@@ -15,15 +15,27 @@ async def get_data(key: str, project_service: ProjectService = Depends(get_proje
     Returns:
         JSONResponse: Json packet in the format of {"key": value}
     """
-    value = project_service.get(key)
+    #fetch data from service by property and return as json
+    value = getattr(project_service, key, None)
     if value is None:
         return JSONResponse({"error": "Key not found"}, status_code=404)
+    #populate json response with key and value
     return JSONResponse({key: value})
 
 @router.post("/{key}")
 async def set_data(key: str, payload: dict, project_service: ProjectService = Depends(get_project_service)):
-    value = payload.get("value")
-    if value is None:
-        return JSONResponse({"error": "Missing value"}, status_code=400)
-    project_service.set(key, value)
-    return JSONResponse({"success": True, "key": key, "value": value})
+    """Generic set controller to set any specific field directly in the project file
+
+    Args:
+        key (str): data to target
+        payload (dict): json payload in the format of {"key": value}
+        project_service (ProjectService, optional): DI'd service. Defaults to Depends(get_project_service).
+
+    Returns:
+        _type_: _description_
+    """
+    if not hasattr(project_service, key):
+        return JSONResponse({"error": "Key not found"}, status_code=404)
+
+    setattr(project_service, key, payload.get(key))
+    return JSONResponse({"success": True, "key": key, "value": getattr(project_service, key, None)})

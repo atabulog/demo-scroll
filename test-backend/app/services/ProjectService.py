@@ -13,7 +13,7 @@ class ProjectService:
         """Service maintaining stored data for the system
 
         Args:
-            file_path (Path, optional): storage location for data. Defaults to Path("data/persistent-storage.json").
+            file_path (Path, optional): storage location for data. Defaults to Path("app/data/persistent-storage.json").
         """
         self._file_path = file_path
         self._file_path.parent.mkdir(exist_ok=True)
@@ -44,24 +44,24 @@ class ProjectService:
             file.write(self._project.model_dump_json(indent=2))
 
     @property
-    def project_title(self) -> str:
+    def title(self) -> str:
         """Project title getter
 
         Returns:
             str: Current project title
         """
         with self._lock:
-            return self._project.project_title
+            return self._project.title
         
-    @project_title.setter
-    def project_title(self, value: str) -> None:
+    @title.setter
+    def title(self, value: str) -> None:
         """Project title setter
 
         Args:
             value (str): New project title
         """
         with self._lock:
-            self._project.project_title = value
+            self._project.title = value
             self._save_file()
 
 # Create a single instance for the app
