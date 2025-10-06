@@ -64,6 +64,27 @@ class ProjectService:
             self._project.title = value
             self._save_file()
 
+    @property
+    def version(self) -> str:
+        """Project version getter
+
+        Returns:
+            str: Current project version
+        """
+        with self._lock:
+            return self._project.version
+        
+    @version.setter
+    def version(self, value: str) -> None:
+        """Project version setter
+
+        Args:
+            value (str): New project version
+        """
+        with self._lock:
+            self._project.version = value
+            self._save_file()
+
 # Create a single instance for the app
 project_service_instance = ProjectService()
 
