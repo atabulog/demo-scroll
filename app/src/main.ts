@@ -1,4 +1,9 @@
-import { Toolbar } from "./components/toolbar/toolbar";
+import { mount } from 'svelte'
+import './app.css'
+import App from './App.svelte'
 
-const toolbar = new Toolbar();
-toolbar.render(document.body);
+const app = mount(App, {
+  target: document.getElementById('app')!,
+})
+
+export default app

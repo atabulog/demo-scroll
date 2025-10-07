@@ -20,7 +20,8 @@
                 "ms-python.debugpy",
                 "ms-python.vscode-pylance",
                 "ms-python.vscode-python-envs",
-                "njpwerner.autodocstring"
+                "njpwerner.autodocstring",
+                "svelte.svelte-vscode"
             ]
         }
     },
