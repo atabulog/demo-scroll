@@ -4,6 +4,18 @@ from app.services.ProjectService import ProjectService, get_project_service
 
 router: APIRouter = APIRouter()
 
+@router.get("")
+async def get_project(project_service: ProjectService = Depends(get_project_service))->JSONResponse:
+    """Gets the entire project file
+
+    Args:
+        project_service (ProjectService, optional): DI'd service. Defaults to Depends(get_project_service).
+
+    Returns:
+        JSONResponse: JSON package of the project
+    """
+    return JSONResponse(project_service.project.model_dump_json())
+
 @router.get("/{key}")
 async def get_data(key: str, project_service: ProjectService = Depends(get_project_service))->JSONResponse:
     """Generic get controller to get any specific field directly out of the project file
@@ -22,7 +34,7 @@ async def get_data(key: str, project_service: ProjectService = Depends(get_proje
     #populate json response with key and value
     return JSONResponse({key: value})
 
-@router.post("/{key}")
+@router.patch("/{key}")
 async def set_data(key: str, payload: dict, project_service: ProjectService = Depends(get_project_service)):
     """Generic set controller to set any specific field directly in the project file
 
@@ -38,4 +50,4 @@ async def set_data(key: str, payload: dict, project_service: ProjectService = De
         return JSONResponse({"error": "Key not found"}, status_code=404)
 
     setattr(project_service, key, payload.get(key))
-    return JSONResponse({"success": True, "key": key, "value": getattr(project_service, key, None)})
+    return JSONResponse(project_service.project.model_dump_json())

@@ -44,6 +44,17 @@ class ProjectService:
             file.write(self._project.model_dump_json(indent=2))
 
     @property
+    def project(self) -> Project:
+        """Project getter
+
+        Returns:
+            Project: returns the entire project data
+        """
+        with self._lock:
+            return self._project
+
+
+    @property
     def title(self) -> str:
         """Project title getter
 
