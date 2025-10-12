@@ -10,6 +10,8 @@ export const project = writable<ProjectIntf | null>(null);
  */
 export async function loadProject() {
     const data: ProjectIntf = await getProjectData();
+    console.log("Project title: " + data.title);
+    console.log("version: " + data.version);
     project.set(data);
 }
 

@@ -5,11 +5,7 @@ const API_BASE_URL = `${backend_url}/project`
 
 export async function getProjectData(): Promise<ProjectIntf> {
     //fetch project data
-    const response = await fetch(API_BASE_URL, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-
-    });
+    const response = await fetch(API_BASE_URL);
     //handle errors
     if (!response.ok) throw new Error(`Error fetching project data: ${response.statusText}`);
     // return result

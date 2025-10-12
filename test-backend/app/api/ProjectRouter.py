@@ -14,7 +14,7 @@ async def get_project(project_service: ProjectService = Depends(get_project_serv
     Returns:
         JSONResponse: JSON package of the project
     """
-    return JSONResponse(project_service.project.model_dump_json())
+    return project_service.project.model_dump()
 
 @router.get("/{key}")
 async def get_data(key: str, project_service: ProjectService = Depends(get_project_service))->JSONResponse:
@@ -50,4 +50,4 @@ async def set_data(key: str, payload: dict, project_service: ProjectService = De
         return JSONResponse({"error": "Key not found"}, status_code=404)
 
     setattr(project_service, key, payload.get(key))
-    return JSONResponse(project_service.project.model_dump_json())
+    return project_service.project.model_dump()
