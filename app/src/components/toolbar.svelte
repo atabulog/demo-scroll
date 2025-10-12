@@ -41,4 +41,7 @@
 </div>
 
 <style>
+    div.toolbar {
+        display: flex;
+    }
 </style>
