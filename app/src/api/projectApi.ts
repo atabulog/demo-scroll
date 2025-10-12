@@ -14,14 +14,14 @@ export async function getProjectData(): Promise<ProjectIntf> {
 
 /**
  * Update the project title
- * @param newTitle new title to write to server
+ * @param title new title to write to server
  */
-export async function updateProjectTitle(newTitle: string): Promise<ProjectIntf> {
+export async function updateProjectTitle(title: string): Promise<ProjectIntf> {
     //post update
     const response = await fetch(`${API_BASE_URL}/title`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ newTitle })
+        body: JSON.stringify({ title })
     });
     //handle errors
     if (!response.ok) throw new Error(`Error updating project title: ${response.statusText}`);
